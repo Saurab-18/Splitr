@@ -1,3 +1,5 @@
+import { query } from "./_generated/server";
+import { internal } from "./_generated/api";
 export const getAllContacts = query(async (ctx) => {
   // Use the centralized getCurrentUser instead of duplicating auth logic
   const currentUser = await ctx.runQuery(internal.users.getCurrentUser);

@@ -3,11 +3,11 @@ import { BarLoader } from "react-spinners";
 import { useConvexQuery } from "../../../hooks/use-convex-query";
 import { api } from "../../../convex/_generated/api";
 import { Button } from "../../../components/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import People from "./components/people";
 import Groups from "./components/groups";
 import CreateGroupModal from "./components/create-group-modal";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Plus } from "lucide-react";
 
 export default function Contacts() {
@@ -17,6 +17,18 @@ export default function Contacts() {
   );
 
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const createGroupParam = searchParams.get("createGroup");
+    if (createGroupParam === "true") {
+      setIsCreateGroupModalOpen(true);
+      const url = new URL(window.location.href);
+      url.searchParams.delete("createGroup");
+      router.replace(url.pathname + url.search);
+    }
+  }, [searchParams, router]);
+
   if (isLoading) {
     return (
       <div>
