@@ -75,19 +75,21 @@ export const Header = () => {
               afterSignOutUrl="/"
             />
           </Authenticated>
+
           <Unauthenticated>
-            <SignIn>
-              <Button variant={"ghost"}>Sign In</Button>
-            </SignIn>
-            <SignUp>
+            <SignInButton>
+              <Button variant="ghost">Sign In</Button>
+            </SignInButton>
+
+            <SignUpButton>
               <Button className="bg-green-600 hover:bg-green-700 border-none">
                 Get Started
               </Button>
-            </SignUp>
+            </SignUpButton>
           </Unauthenticated>
         </div>
       </nav>
-      {isLoading && <BarLoader />}
+      {isLoading && <BarLoader width={"100%"} color="#36d7b7" />}
     </header>
   );
 };
